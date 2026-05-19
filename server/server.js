@@ -18,7 +18,7 @@ await connectDB();
 // CORS setup — must come before routes
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://prachi-crafted-cv.vercel.app/"  // 👈 ADD THIS NEW LINE
+  "https://prachi-crafted-cv.vercel.app"  // 👈 ADD THIS NEW LINE
 ];
 
 app.use(
