@@ -15,8 +15,25 @@ const PORT = process.env.PORT || 3000;
 // Database connection
 await connectDB();
 
+// CORS setup — must come before routes
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://prachi-crafted-cv.vercel.app/"  // 👈 ADD THIS NEW LINE
+];
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error("Not allowed by CORS"));
+    },
+    credentials: true,
+  })
+);
+
 app.use(express.json());
-app.use(cors());
 
 app.get("/", (req, res) => res.send("Server is live..."));
 app.use("/api/users", userRouter);
